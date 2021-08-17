@@ -1,0 +1,264 @@
+:root {
+    --primary-color: #EE4D2D;
+    --white-color: #fff;
+    --black-color: #000;
+    --text-color: #333;
+    --border-color: #dbdbdb;
+    --star-gold-color: #ffce3e;
+
+    --header-height: 120px;
+    --navbar-height: 34px;
+    /* cách này dùng để sau này có thay đổi giá trị height cho nav cũng kh ảnh hưởng đến dòng tìm kiếm */
+    --header-with-search-height: calc(var(--header-height) - var(--navbar-height));
+}
+
+* {
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+    line-height: 1.6rem;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+
+/* RESPONSIVE */
+
+.grid {
+    width: 1200px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.grid__full-width {
+    width: 100%;
+}
+
+.grid__row {
+    display: flex;
+    flex-wrap: wrap;
+    /* margin-left và right cho row, padding-left và right cho column sẽ tự động tạo khoảng cách giữa các column với nhau */
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+/* Test */
+.grid__column-2 {
+    /* margin-left và right cho row, padding-left và right cho column sẽ tự động tạo khoảng cách giữa các column với nhau */
+    padding-left: 5px;
+    padding-right: 5px;
+    width: calc(100% / 12 * 2);
+}
+
+.grid__column-2-4 {
+    /* margin-left và right cho row, padding-left và right cho column sẽ tự động tạo khoảng cách giữa các column với nhau */
+    padding-left: 5px;
+    padding-right: 5px;
+    width: calc(100% / 5);
+}
+
+.grid__column-10 {
+    /* margin-left và right cho row, padding-left và right cho column sẽ tự động tạo khoảng cách giữa các column với nhau */
+    padding-left: 5px;
+    padding-right: 5px;
+    width: calc(100% / 12 * 10);
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Animation cho form đăng kí & đăng nhập */
+@keyframes growth {
+    from {
+        transform: scale(var(--growth-from));
+    }
+    to {
+        transform: scale(var(--growth-to));
+    }
+}
+
+/* MODAL  */
+
+/* chiếm hết màn hình */
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    animation: fadeIn linear 0.1s;
+}
+
+.modal__overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal__body {
+    --growth-from: 0.7;
+    --growth-to: 1;
+    margin: auto; /* muốn căn giữa thì thẻ cha phải có flex */
+    position: relative;
+    z-index: 1; /* đè form này lên form làm mờ */
+    animation: growth linear .1s; /* animation to dần từ 70% đến 100% */
+}
+
+/* Button style */
+
+/* xài chung cho các nút của shopee */
+.btn {
+    min-width: 124px;
+    height: 34px;
+    text-decoration: none;
+    border: none;
+    border-radius: 2px;
+    font-size: 1.5rem;
+    padding: 0 12px;
+    outline: none;
+    cursor: pointer;
+    color: var(--text-color);
+    /* inline-flex giúp cho các nút ngang hàng với nhau */
+    display: inline-flex; /* căn giữa nút luôn có 3 thuộc tính này */
+    align-items: center; /* căn giữa nút luôn có 3 thuộc tính này */
+    justify-content: center; /* căn giữa nút luôn có 3 thuộc tính này */
+    line-height: 1.6rem; /* căn giữa chữ trong nút để số chẵn */
+    background-color: #fff;
+}
+
+/* nút thường này là: trở về */
+.btn.btn--normal:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* nút này là: kết nối fb, gg */
+.btn--size-s {
+    height: 32px;
+    font-size: 12px;
+    padding: 0 8px;
+}
+
+/* Element sử dụng 2 class */
+.btn.btn--primary {
+    color: var(--white-color);
+    background-color: var(--primary-color);
+}
+
+/* vô hiệu hóa button, muốn sử dụng thì thêm class này vô button đó */
+.btn.btn--disable {
+    color: #949494;
+    cursor: default;
+    background-color: #c3c3c3;
+}
+
+.block-form {
+    display: none;
+}
+
+/* Selection */
+.select-input {
+    position: relative;
+    min-width: 200px;
+    height: 34px;
+    padding: 0 12px;
+    border-radius: 2px;
+    background-color: var(--white-color);
+    display: flex;
+    align-items: center; /* căn giữa ở chiều dọc */
+    justify-content: space-between; /* cho chữ giá và icon mũi tên cách xa nhau đoạn giữa */
+}
+
+/* thẻ span chứa nội dung: Giá */
+.select-input__label {
+    font-size: 1.4rem;
+}
+
+/* thẻ chứa icon */
+.select-input__icon {
+    font-size: 1.4rem;
+    color: rgb(131, 131, 131);
+    position: relative;
+    top: 1px;
+}
+
+.select-input:hover .select-input__list {
+    display: block;
+}
+
+/* thẻ cha ul: chứa các li */
+.select-input__list {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 23px;
+    border-radius: 2px;
+    background-color: var(--white-color);
+    padding: 8px 16px;
+    list-style: none;
+    display: none;
+    z-index: 1;
+}
+
+/* thẻ a chứa 1 nội dung: cao đến thấp hoặc thấp đến cao */
+.select-input__link {
+    font-size: 1.4rem;
+    color: var(--text-color);
+    text-decoration: none;
+    display: block;
+    padding: 8px 0;
+}
+
+.select-input__link:hover {
+    color: var(--primary-color);
+}
+
+/* PAGINATION: PHÂN TRANG */
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+}
+
+.pagination-item {
+    margin: 0 12px;
+}
+
+.pagination-item--active .pagination-item__link {
+    color: var(--white-color);
+    background-color: var(--primary-color);
+}
+
+.pagination-item--active .pagination-item__link:hover {
+    color: var(--white-color);
+    background-color: #ed5c3f;
+}
+
+.pagination-item__link {
+    --height: 30px;
+    display: block;
+    font-weight: 400;
+    text-decoration: none;
+    font-size: 2rem;
+    color: #939393;
+    min-width: 40px;
+    height: var(--height);
+    line-height: var(--height); /* căn giữa theo chiều cao... giá trị bằng height */
+    text-align: center;
+    border-radius: 2px;
+}
+
+.pagination-item__link:hover {
+    color: #ef5a3c;
+}
